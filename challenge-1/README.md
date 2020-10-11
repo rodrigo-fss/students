@@ -27,10 +27,6 @@ One quick example: Let's say that our leads data just got from the bucket to big
 
 Nice! Now our events are in a relational database ready to be queried by our analysts and shown to the rest of the company by some BI solution, like Metabase. Depending on the required transformations this pipeline can perform ELT near real-time, but you should note that there is a cost increase related to the frequency of the extraction runs.
 
-Implementation costs can vary a lot depending on the amount of assets - each one represent a full pipeline with bucket partition, pyspark transformation scripts, schemas and transformation queries. And the amount of data itself - if the volume is not that big we can save a lot of time leaving spark transformations behind.
-
-That said I have implemented a MVP solution just like the one presented with 3 people in a month and half.
-
 #### Data Governance
 
 You can apply data governance on this architecture in many levels, I would suggest that only data engineers and scientists should have access to raw data and staging area, as BigQuery and Athena let you set permission on datasets level a data scientists of the origination squad may only have access to origination data. Other permission can be done directly on metabase, assigning people to groups and groups to datasets all you governance needs should be covered!
@@ -44,5 +40,3 @@ As we need this data to be available quickly we treat if a little bit differentl
 All the transformation is done with Kafka Streams, a framework design to this principle - transform data in streaming pipelines. As you should have thought, this certainly reduce the range of transformations we can perform on the data before it reaches the data marts.
 
 With this design the data should be in a ready to be ingested and consume format after the transformation, so if you want an aggregated metric of sales per region - the schema of the messages after the Kafka Streams pipeline should be really close to the presented to the company, and once it is, we use Kafka Connect to insert this metric directly inside of the database making it ready to be consumed in just a few seconds after the event occurred!
-
-Implementation costs can vary a lot depending on the kind of transformation Kafka Streams has to do before make the indicator available but its implementation tends to be much easier than the batch one since we only have to configure the environment and code the transformation. A MVP should be ready in 3 weeks with a 3 people team. (Its good to remember that scaling the team does not have a linear impact on the deadline, its easy to think that 6 people would be able to do it in a week and a half but many real world cases show us thats not true most of the times)
