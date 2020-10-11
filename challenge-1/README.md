@@ -2,7 +2,7 @@
 
 For the data mart challenge I choose to ingest all the tables as-is directly into bigquery and made all the aggregations and transformations with SQL
 
-I`ve made avaible this BI base inside a public metabase you can check **[here]**(http://35.202.47.4/public/dashboard/72bc0b33-f4cb-420b-8eb7-1062430ba861)
+I`ve made avaible this BI base inside a public metabase you can check [**here**](http://35.202.47.4/public/dashboard/72bc0b33-f4cb-420b-8eb7-1062430ba861)
 
 
 # Challenge 1 - Pipeline Architecture Design
